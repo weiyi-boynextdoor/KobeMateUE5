@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "JsEnv.h"
 #include "TsWrapperSubsystem.generated.h"
 
 /**
@@ -16,4 +17,7 @@ class PUERTSWRAPPER_API UTsWrapperSubsystem final : public UGameInstanceSubsyste
 	
 public:
 	void CreateJsVM();
+
+private:
+	TSharedPtr<puerts::FJsEnv> JsEnv;
 };

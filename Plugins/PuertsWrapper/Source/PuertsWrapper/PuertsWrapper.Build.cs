@@ -11,7 +11,7 @@ public class PuertsWrapper : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Puerts", "Core", "CoreUObject", "Engine"
+				"Puerts", "JsEnv", "Core", "CoreUObject", "Engine", "DeveloperSettings"
 			}
 		);
 	}
