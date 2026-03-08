@@ -1,7 +1,21 @@
 #include "TsWrapperSubsystem.h"
 #include "PuertsWrapperSetting.h"
 
-void UTsWrapperSubsystem::CreateJsVM()
+void UTsWrapperSubsystem::Initialize(FSubsystemCollectionBase& Collection)
+{
+	UPuertsWrapperSetting& Settings = *GetMutableDefault<UPuertsWrapperSetting>();
+	if (Settings.bEnable)
+	{
+		CreateVM();
+	}
+}
+
+void UTsWrapperSubsystem::Deinitialize()
+{
+	JsEnv.Reset();
+}
+
+void UTsWrapperSubsystem::CreateVM()
 {
 	UPuertsWrapperSetting& Settings = *GetMutableDefault<UPuertsWrapperSetting>();
 	if (Settings.JsDebugPort <= 0)
@@ -11,7 +25,7 @@ void UTsWrapperSubsystem::CreateJsVM()
 	else
 	{
 		JsEnv = MakeShared<puerts::FJsEnv>(std::make_unique<puerts::DefaultJSModuleLoader>(Settings.JsRootPath), std::make_shared<puerts::FDefaultLogger>(), Settings.JsDebugPort);
-		if (Settings.WaitDebugger)
+		if (Settings.bWaitDebugger)
 		{
 			JsEnv->WaitDebugger();
 		}

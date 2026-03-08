@@ -16,7 +16,11 @@ class PUERTSWRAPPER_API UTsWrapperSubsystem final : public UGameInstanceSubsyste
 	GENERATED_BODY()
 	
 public:
-	void CreateJsVM();
+	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+
+	virtual void Deinitialize() override;
+
+	void CreateVM();
 
 private:
 	TSharedPtr<puerts::FJsEnv> JsEnv;

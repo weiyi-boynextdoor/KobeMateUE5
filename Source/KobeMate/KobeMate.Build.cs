@@ -24,20 +24,7 @@ public class KobeMate : ModuleRules
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 
 		PublicIncludePaths.AddRange(new string[] {
-			"KobeMate",
-			"KobeMate/Variant_Platforming",
-			"KobeMate/Variant_Platforming/Animation",
-			"KobeMate/Variant_Combat",
-			"KobeMate/Variant_Combat/AI",
-			"KobeMate/Variant_Combat/Animation",
-			"KobeMate/Variant_Combat/Gameplay",
-			"KobeMate/Variant_Combat/Interfaces",
-			"KobeMate/Variant_Combat/UI",
-			"KobeMate/Variant_SideScrolling",
-			"KobeMate/Variant_SideScrolling/AI",
-			"KobeMate/Variant_SideScrolling/Gameplay",
-			"KobeMate/Variant_SideScrolling/Interfaces",
-			"KobeMate/Variant_SideScrolling/UI"
+			"KobeMate"
 		});
 
 		// Uncomment if you are using Slate UI
