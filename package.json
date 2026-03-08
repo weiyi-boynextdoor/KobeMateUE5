@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "lint": "eslint TypeScript/**/*.ts",
+    "lint:fix": "eslint TypeScript/**/*.ts --fix"
+  },
+  "dependencies": {
+    "@types/node": "^25.3.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
+    "eslint": "^10.0.3",
+    "typescript-eslint": "^8.56.1"
+  },
+  "type": "module"
+}
