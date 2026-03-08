@@ -39,3 +39,7 @@
 - Do not modify or rely on deep understanding of `Plugins/Puerts` source code.
 - `Plugins/PuertsWrapper` is a project-owned plugin that wraps puerts integration.
 - It is allowed to modify C++ files under `Plugins/PuertsWrapper` when implementing project features or fixes.
+
+## TypeScript Naming Convention
+- In TypeScript code that overrides Unreal Engine functions or variables, follow UE-style naming: **PascalCase / UpperCamelCase** (starting with an uppercase letter).
+- In engine-agnostic, pure TypeScript code, use **snake_case** naming (lowercase words joined by underscores).
