@@ -1,5 +1,7 @@
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
+import prettierConfig from "eslint-config-prettier";
+import prettierPlugin from "eslint-plugin-prettier";
 
 export default [
   {
@@ -14,11 +16,17 @@ export default [
       "Plugins/",
       "Typing/",
       "*.uasset",
+      "*.uasset",
       "*.umap"
     ]
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
+  {
+    plugins: {
+      prettier: prettierPlugin
+    }
+  },
   {
     files: ["TypeScript/**/*.ts"],
     languageOptions: {
@@ -39,9 +47,8 @@ export default [
       "@typescript-eslint/explicit-function-return-types": "off",
       "@typescript-eslint/no-explicit-any": "warn",
       "no-console": "off",
-      "semi": ["error", "always"],
-      "quotes": ["error", "double"],
-      "indent": ["error", 4]
+      "prettier/prettier": "error"
     }
-  }
+  },
+  prettierConfig
 ];
