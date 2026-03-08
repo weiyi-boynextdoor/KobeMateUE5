@@ -1,5 +1,5 @@
 console.log("init from ts begin");
 
-import "./JsClasses/JsUserWidgetMixin";
+import "./JsUserWidgetMixin";
 
 console.log("init from ts end");
