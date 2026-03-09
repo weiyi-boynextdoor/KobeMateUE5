@@ -9,6 +9,8 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWebSocketMessageReceived, const FString&, Message);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWebSocketConnected);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWebSocketConnectionError, const FString&, Error);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnWebSocketClosed, int32, StatusCode, const FString&, Reason, bool, bWasClean);
 
 UCLASS()
 class KOBEMATE_API UWebsocketSubsystem : public UGameInstanceSubsystem
@@ -25,8 +27,17 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "WebSocket")
 	FOnWebSocketConnected OnConnected;
 
+	UPROPERTY(BlueprintAssignable, Category = "WebSocket")
+	FOnWebSocketConnectionError OnConnectionError;
+
+	UPROPERTY(BlueprintAssignable, Category = "WebSocket")
+	FOnWebSocketClosed OnClosed;
+
 	UFUNCTION(BlueprintCallable, Category = "Websocket")
 	void Connect(const FString& Url);
+
+	UFUNCTION(BlueprintCallable, Category = "Websocket")
+	void Close();
 
 	UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, Category = "Websocket")
 	bool SendMessage(const FString& Message);

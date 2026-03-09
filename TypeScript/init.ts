@@ -11,11 +11,6 @@ const game_instance = argv.getByName("GameInstance") as UE.GameInstance;
 G.game_instance = game_instance;
 
 G.websocket_manager = new WebsocketManager();
-G.websocket_manager.init(
-    UE.SubsystemBlueprintLibrary.GetGameInstanceSubsystem(
-        game_instance,
-        UE.WebsocketSubsystem.StaticClass()
-    ) as UE.WebsocketSubsystem
-);
+G.websocket_manager.init();
 
 console.log("init from ts end");
