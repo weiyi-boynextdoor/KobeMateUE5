@@ -1,9 +1,11 @@
 // Global variables
 
+import * as UE from "ue";
 import { JsClass } from "./JsClass";
 
 class Global {
     registered_classes: Map<string, typeof JsClass>;
+    game_instance: UE.GameInstance;
 
     constructor() {
         this.registered_classes = new Map<string, typeof JsClass>();

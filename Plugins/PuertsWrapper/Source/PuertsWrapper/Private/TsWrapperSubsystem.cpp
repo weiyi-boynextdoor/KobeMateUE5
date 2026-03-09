@@ -32,7 +32,9 @@ void UTsWrapperSubsystem::CreateVM()
 
 		if (!Settings.JsEntryFile.IsEmpty())
 		{
-			JsEnv->Start(Settings.JsEntryFile);
+			TArray<TPair<FString, UObject*>> Arguments;
+			Arguments.Add(TPair<FString, UObject*>(TEXT("GameInstance"), GetGameInstance()));
+			JsEnv->Start(Settings.JsEntryFile, Arguments);
 		}
 	}
 }
