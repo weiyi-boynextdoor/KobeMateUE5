@@ -1,11 +1,13 @@
 // Global variables
 
 import * as UE from "ue";
-import { JsClass } from "./JsClass";
+import type { JsClass } from "./JsClass";
+import type { WebsocketManager } from "./WebsocketManager";
 
 class Global {
     registered_classes: Map<string, typeof JsClass>;
     game_instance: UE.GameInstance;
+    websocket_manager: WebsocketManager;
 
     constructor() {
         this.registered_classes = new Map<string, typeof JsClass>();
