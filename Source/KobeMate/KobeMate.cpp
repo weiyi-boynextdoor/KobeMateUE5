@@ -3,6 +3,6 @@
 #include "KobeMate.h"
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, KobeMate, "KobeMate" );
+IMPLEMENT_PRIMARY_GAME_MODULE(FDefaultGameModuleImpl, KobeMate, "KobeMate");
 
 DEFINE_LOG_CATEGORY(LogKobeMate)

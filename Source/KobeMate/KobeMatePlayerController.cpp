@@ -1,6 +1,5 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-
 #include "KobeMatePlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "Engine/LocalPlayer.h"
@@ -23,13 +22,12 @@ void AKobeMatePlayerController::BeginPlay()
 		{
 			// add the controls to the player screen
 			MobileControlsWidget->AddToPlayerScreen(0);
-
-		} else {
+		}
+		else
+		{
 
 			UE_LOG(LogKobeMate, Error, TEXT("Could not spawn mobile controls widget."));
-
 		}
-
 	}
 }
 

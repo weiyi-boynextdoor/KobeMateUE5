@@ -15,10 +15,6 @@ class AKobeMateGameMode : public AGameModeBase
 	GENERATED_BODY()
 
 public:
-	
 	/** Constructor */
 	AKobeMateGameMode();
 };
-
-
-
