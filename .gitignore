@@ -91,3 +91,6 @@ Typing/
 
 # npm install
 node_modules/
+
+# Visual studio temp file
+enc_temp_folder/
