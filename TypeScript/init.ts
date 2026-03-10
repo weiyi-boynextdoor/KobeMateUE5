@@ -5,6 +5,7 @@ import { argv } from "puerts";
 
 import { G } from "./G";
 import "./JsUserWidgetMixin";
+import "./JsComponentMixin";
 import { WebsocketManager } from "./WebsocketManager";
 
 const game_instance = argv.getByName("GameInstance") as UE.GameInstance;

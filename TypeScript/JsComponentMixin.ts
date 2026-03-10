@@ -1,29 +1,29 @@
 import * as UE from "ue";
 import { blueprint } from "puerts";
 import type { JsClass } from "./JsClass";
-import { get_registered_class } from "./G";
+import { G, get_registered_class } from "./G";
 
-const BP = UE.Class.Load("/PuertsWrapper/JsUserWidget.JsUserWidget_C");
+const BP = UE.Class.Load("/PuertsWrapper/JsComponent.JsComponent_C");
 
-const BP_Mixin = blueprint.tojs<typeof UE.PuertsWrapper.JsUserWidget.JsUserWidget_C>(BP);
+const BP_Mixin = blueprint.tojs<typeof UE.PuertsWrapper.JsComponent.JsComponent_C>(BP);
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type, @typescript-eslint/no-unsafe-declaration-merging
-interface BPExt extends UE.PuertsWrapper.JsUserWidget.JsUserWidget_C {}
+interface BPExt extends UE.PuertsWrapper.JsComponent.JsComponent_C {}
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 class BPExt {
     js_instance: JsClass;
-    PreConstruct(IsDesignTime: boolean) {
+    ReceiveBeginPlay() {
         if (!this.JsClass) {
             return;
         }
-        // UE.KismetSystemLibrary.PrintString(this.GetWorld(), "JsUserWidget mixin succeeded: " + this.JsClass);
-        const js_class = get_registered_class(this.JsClass, "JsClasses/UI/" + this.JsClass);
+        // UE.KismetSystemLibrary.PrintString(this.GetWorld(), "JsComponent mixin succeeded: " + this.JsClass);
+        const js_class = get_registered_class(this.JsClass, "JsClasses/" + this.JsClass);
         this.js_instance = new js_class();
         this.js_instance.initialize(this);
     }
 
-    Destruct() {
+    ReceiveEndPlay(EndPlayReason: UE.EEndPlayReason) {
         if (this.js_instance) {
             this.js_instance.deinitialize();
         }
