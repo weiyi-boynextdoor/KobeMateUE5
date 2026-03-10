@@ -10,10 +10,12 @@ export enum ConnectionStatus {
 export class WebsocketManager {
     connection_status: ConnectionStatus;
     private on_connection_status_changed_listeners: Set<() => void>;
+    private on_message_listeners: Set<(json: JSON) => void>;
 
     constructor() {
         this.connection_status = ConnectionStatus.DISCONNECTED;
         this.on_connection_status_changed_listeners = new Set();
+        this.on_message_listeners = new Set();
     }
 
     get_ws_subsystem() {
@@ -54,6 +56,14 @@ export class WebsocketManager {
         this.on_connection_status_changed_listeners.delete(listener);
     }
 
+    add_message_listener(listener: (json: JSON) => void) {
+        this.on_message_listeners.add(listener);
+    }
+
+    remove_message_listener(listener: (json: JSON) => void) {
+        this.on_message_listeners.delete(listener);
+    }
+
     on_connected = () => {
         console.log("Websocket connected!");
         this.connection_status = ConnectionStatus.CONNECTED;
@@ -80,7 +90,8 @@ export class WebsocketManager {
 
     on_message = (message: string) => {
         const json = JSON.parse(message);
-        if (json.action === "text_response") {
+        for (const listener of this.on_message_listeners) {
+            listener(json);
         }
     };
 }
