@@ -19,7 +19,8 @@ public class KobeMate : ModuleRules
 			"GameplayStateTreeModule",
 			"UMG",
 			"Slate",
-			"WebSockets"
+			"WebSockets",
+			"AudioExtensions"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
