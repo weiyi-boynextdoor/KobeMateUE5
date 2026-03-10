@@ -9,11 +9,11 @@ export enum ConnectionStatus {
 
 export class WebsocketManager {
     connection_status: ConnectionStatus;
-    private on_connection_state_changed_listeners: Array<() => void>;
+    private on_connection_status_changed_listeners: Set<() => void>;
 
     constructor() {
         this.connection_status = ConnectionStatus.DISCONNECTED;
-        this.on_connection_state_changed_listeners = [];
+        this.on_connection_status_changed_listeners = new Set();
     }
 
     get_ws_subsystem() {
@@ -47,7 +47,11 @@ export class WebsocketManager {
     }
 
     add_connection_status_listener(listener: () => void) {
-        this.on_connection_state_changed_listeners.push(listener);
+        this.on_connection_status_changed_listeners.add(listener);
+    }
+
+    remove_connection_status_listener(listener: () => void) {
+        this.on_connection_status_changed_listeners.delete(listener);
     }
 
     on_connected = () => {
@@ -69,7 +73,7 @@ export class WebsocketManager {
     };
 
     on_connection_state_changed() {
-        for (const listener of this.on_connection_state_changed_listeners) {
+        for (const listener of this.on_connection_status_changed_listeners) {
             listener();
         }
     }

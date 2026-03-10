@@ -9,6 +9,7 @@ export class WBP_MainUI extends JsClass {
 
     initialize(Object: UE.Object): void {
         const widget = Object as UE.Game.UI.WBP_MainUI.WBP_MainUI_C;
+
         this.weak_widget = new WeakRef(widget);
         widget.Input_IP.SetText("127.0.0.1");
         widget.Input_Port.SetText("8024");
@@ -30,16 +31,16 @@ export class WBP_MainUI extends JsClass {
             G.websocket_manager.connect(url);
         });
 
-        websocket_manager.add_connection_status_listener(() => {
-            const widget = this.weak_widget.deref();
-            if (widget) {
-                this.update_connection_text(widget);
-            }
-        });
-        this.update_connection_text(widget);
+        websocket_manager.add_connection_status_listener(this.on_connection_status_changed);
     }
 
-    update_connection_text(widget: UE.Game.UI.WBP_MainUI.WBP_MainUI_C) {
+    deinitialize() {
+        G.websocket_manager.remove_connection_status_listener(this.on_connection_status_changed);
+    }
+
+    on_connection_status_changed = () => {
+        const widget = this.weak_widget.deref();
+
         switch (G.websocket_manager.connection_status) {
             case ConnectionStatus.DISCONNECTED:
                 widget.Text_Connect.SetText("Connect");
@@ -51,5 +52,5 @@ export class WBP_MainUI extends JsClass {
                 widget.Text_Connect.SetText("Disconnect");
                 break;
         }
-    }
+    };
 }
