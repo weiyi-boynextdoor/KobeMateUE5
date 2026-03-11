@@ -27,7 +27,10 @@ export class BP_StreamableAudio extends JsClass {
 
     on_websocket_message = (json: JSON) => {
         if (json["event"] === "audio_start") {
-            UE.GameplayStatics.PlaySound2D(this.actor, this.actor.StreamableAudio);
+            const audio = this.actor.StreamableAudio as UE.KobeSoundWaveProcedural;
+            audio.NumChannels = json["channel"] as number;
+            audio.SampleRate = json["sample_rate"] as number;
+            UE.GameplayStatics.PlaySound2D(this.actor, audio);
         } else if (json["event"] === "audio_chunk") {
             this.actor.StreamableAudio.QueueAudioHexData(json["data"]);
         }
