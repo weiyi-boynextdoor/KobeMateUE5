@@ -14,9 +14,6 @@ export class BP_StreamableAudio extends JsClass {
             return;
         }
         this.actor = actor as UE.Game.Blueprints.BP_StreamableAudio.BP_StreamableAudio_C;
-        this.actor.StreamableAudio = UE.NewObject(
-            UE.KobeSoundWaveProcedural.StaticClass()
-        ) as UE.KobeSoundWaveProcedural;
         G.websocket_manager.add_message_listener(this.on_websocket_message);
     }
 
@@ -27,7 +24,10 @@ export class BP_StreamableAudio extends JsClass {
 
     on_websocket_message = (json: JSON) => {
         if (json["event"] === "audio_start") {
-            const audio = this.actor.StreamableAudio as UE.KobeSoundWaveProcedural;
+            const audio = UE.NewObject(
+                UE.KobeSoundWaveProcedural.StaticClass()
+            ) as UE.KobeSoundWaveProcedural;
+            this.actor.StreamableAudio = audio;
             audio.NumChannels = json["channel"] as number;
             audio.SampleRate = json["sample_rate"] as number;
             UE.GameplayStatics.PlaySound2D(this.actor, audio);
