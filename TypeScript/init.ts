@@ -14,4 +14,6 @@ G.game_instance = game_instance;
 G.websocket_manager = new WebsocketManager();
 G.websocket_manager.init();
 
+globalThis.G = G;
+
 console.log("init from ts end");
