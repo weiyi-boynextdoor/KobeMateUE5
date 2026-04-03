@@ -9,8 +9,11 @@ class Global {
     game_instance: UE.GameInstance;
     websocket_manager: WebsocketManager;
 
+    config: UE.Game.Blueprints.BP_KobeSaveGame.BP_KobeSaveGame_C;
+
     constructor() {
         this.registered_classes = new Map<string, typeof JsClass>();
+        this.config = null;
     }
 }
 

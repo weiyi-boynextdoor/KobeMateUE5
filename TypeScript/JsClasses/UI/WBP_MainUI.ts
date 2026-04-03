@@ -2,6 +2,7 @@ import * as UE from "ue";
 import { JsClass } from "../../JsClass";
 import { G } from "../../G";
 import { ConnectionStatus } from "../../WebsocketManager";
+import * as utils from "../../utils";
 
 export class WBP_MainUI extends JsClass {
     widget: UE.Game.UI.WBP_MainUI.WBP_MainUI_C;
@@ -10,8 +11,14 @@ export class WBP_MainUI extends JsClass {
         const widget = Object as UE.Game.UI.WBP_MainUI.WBP_MainUI_C;
 
         this.widget = widget;
-        widget.Input_IP.SetText("127.0.0.1");
-        widget.Input_Port.SetText("8024");
+        if (!G.config.Host_IP) {
+            G.config.Host_IP = "127.0.0.1";
+        }
+        widget.Input_IP.SetText(G.config.Host_IP as string);
+        if (!G.config.Host_Port) {
+            G.config.Host_Port = "8024";
+        }
+        widget.Input_Port.SetText(G.config.Host_Port as string);
 
         const websocket_manager = G.websocket_manager;
 
@@ -25,6 +32,8 @@ export class WBP_MainUI extends JsClass {
             }
             const ip = this.widget.Input_IP.GetText().toString();
             const port = this.widget.Input_Port.GetText().toString();
+            G.config.Host_IP = ip;
+            G.config.Host_Port = port;
             const url = `ws://${ip}:${port}/ws`;
             G.websocket_manager.connect(url);
         });
@@ -57,6 +66,7 @@ export class WBP_MainUI extends JsClass {
                 break;
             case ConnectionStatus.CONNECTED:
                 this.widget.Text_Connect.SetText("Disconnect");
+                utils.save_game_config();
                 break;
         }
     };

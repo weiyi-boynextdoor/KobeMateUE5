@@ -8,8 +8,11 @@ import "./JsUserWidgetMixin";
 import "./JsComponentMixin";
 import { WebsocketManager } from "./WebsocketManager";
 
+import * as utils from "./utils";
+
 const game_instance = argv.getByName("GameInstance") as UE.GameInstance;
 G.game_instance = game_instance;
+G.config = utils.get_game_config();
 
 G.websocket_manager = new WebsocketManager();
 G.websocket_manager.init();
