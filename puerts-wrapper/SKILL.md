@@ -29,6 +29,8 @@ Use this skill for KobeMate-style UE5 TypeScript scripting through `PuertsWrappe
    - Component-hosted scripts live under `TypeScript/JsClasses/`.
 9. In `initialize(Object: UE.Object)`, narrow the UE object to the expected widget, component, or owner type before using it.
 10. Keep JS lifetime closed: remove listeners, delegates, and retained UE references in `deinitialize()`.
+11. The base registry uses `require`. Before compiling, ensure the project has `@types/node`; install it when it is missing.
+12. After TypeScript edits, run `tsc` to verify compilation. If `tsc` succeeds, treat the TypeScript work as verified without calling other tools.
 
 ## Conventions
 
