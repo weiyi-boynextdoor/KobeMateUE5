@@ -13,8 +13,8 @@ UCLASS()
 class KOBEMATE_API UKobeSoundWaveProcedural : public USoundWaveProcedural
 {
 	GENERATED_BODY()
-	
+
 public:
 	UFUNCTION(BlueprintCallable, Category = "Audio")
-	void QueueAudioHexData(const FString& HexData);	
+	void QueueAudioHexData(const FString& HexData);
 };
